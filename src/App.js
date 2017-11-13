@@ -5,7 +5,11 @@ import PersonalForm from "./PersonalForm";
 import CardForm from "./CardForm";
 
 const stepTitles = ["Personal information", "Card information", "Finish"];
-
+let id = 0;
+function getNewId() {
+  id += 1;
+  return id;
+}
 class App extends Component {
   state = {
     step: 1,
@@ -28,19 +32,23 @@ class App extends Component {
 
   renderForm = () => {};
 
+  checkStep = () => {};
+
   render() {
     return (
       <div className="container">
         <ul className="tab-panel">
-          <li>
-            <Step />
-          </li>
-          <li>
-            <Step />
-          </li>
-          <li>
-            <Step />
-          </li>
+          {stepTitles.map((step, index) => (
+            <li key={getNewId()}>
+              <Step
+                title={step}
+                onClick={this.handleTabClick}
+                isSelected={true}
+                number={index + 1}
+                isClickable={false}
+              />
+            </li>
+          ))}
         </ul>
         <div className="form-content">
           <PersonalForm />
